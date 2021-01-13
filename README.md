@@ -74,7 +74,7 @@
           return (key == null) ? 0 : (h = key.hashCode()) ^ (h >>> 16);
       } 为什么 要左移16位呢?
     > 因为 在速度,实用性和比特位之间分布需要考虑,因为在比特位分布上得不到好处,还有hashmap应用了树结构解决了hash冲突,还有因为表结构的限制 高位得不到计算,所以应用了高位的比特位 左移然后异或方式来处理key,
-    > 当 hashmap 的长度大于 16 了呢?
+- 当 hashmap 的长度大于 16 了呢?
     **`java.lang.Object.hashCode`**的方法注释是
     hashcode 方法说白了就是提供对象 到 int 的映射 省去一个个比较对象里面的属性.
   This method is supported for the benefit of hash tables such as those provided by {@link java.util.HashMap}
@@ -87,7 +87,8 @@
    
 ##### hashmap 总结:
    - hashmap 是什么,是一个 k,v的容器,通过一个 tab 数组 去存放 kv 的键值对,可以通过键去找到对应的值
-   - 1.8 之后的hashMap
+   - 1.8 之后的 hashMap
 
-#### AQS
+#### AQS 抽象队列同步器
+   - 把运行的线程 用 node 串起来
 ##### 成员变量
