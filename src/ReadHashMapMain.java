@@ -1,4 +1,8 @@
+
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.locks.ReentrantLock;
 
 public class ReadHashMapMain {
 
@@ -28,7 +32,39 @@ public class ReadHashMapMain {
         System.out.println(hashMap);
         boolean interrupted = Thread.interrupted();
         System.out.println(interrupted);
+
+        ConcurrentHashMap concurrentHashMap = new ConcurrentHashMap();
+        concurrentHashMap.put(1,2);
+
+
+        testReetranLock();
 //        Object o = null;
 //        System.out.println(o.hashCode());
+    }
+
+
+    public static void testReetranLock(){
+        ReentrantLock reentrantLock = new ReentrantLock();
+        ArrayList<Thread> threadList = new ArrayList<>();
+        for(int i=0; i < 10; i++ ){
+            int finalI = i;
+            Thread thread = new Thread() {
+                @Override
+                public void run() {
+
+                    System.out.println("before lock"+finalI +"        "+Thread.currentThread().getName());
+                    reentrantLock.lock();
+                    System.out.println("after lock"+finalI+"           "+Thread.currentThread().getName());
+
+                }
+            };
+            threadList.add(thread);
+            
+        }
+        for (Thread t :
+                threadList) {
+            t.start();
+        }
+
     }
 }
