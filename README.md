@@ -1,4 +1,12 @@
 #### HashMap
+##### 类变量
+- `static final int TREEIFY_THRESHOLD = 8`
+    链表长度超过 8 的时候会转成树
+- `int UNTREEIFY_THRESHOLD = 6` 
+    树大小小于6的时候转化为链表
+- `int MIN_TREEIFY_CAPACITY = 64`
+     整个hashmap最小必须要树化的容量
+##### Public operations
 - 构造函数
 `public HashMap(int initialCapacity, float loadFactor)`
   - 问题1 为什么需要判断 initialCapacity > MAXIMUM_CAPACITY
@@ -8,14 +16,51 @@
     >
 - public V put(K key, V value) 
   - final V putVal(int hash, K key, V value, boolean onlyIfAbsent,boolean evict) 
-  
-- HashMapSpliterator 这个用来干什么的呢?
+    > 
+    > ```java 
+    > //1. 看 `table` 是否为null 初始化 `table` 大小 
+    > if ((tab = table) == null || (n = tab.length) == 0)
+    >           n = (tab = resize()).length;
+    > //2. 查看对应槽位是否有值,直接设置进去
+    >  if ((p = tab[i = (n - 1) & hash]) == null)
+    >             tab[i] = newNode(hash, key, value, null);
+    > //3. 比较
+    > else {
+    >   HashMap.Node<K,V> e; K k;
+    >   // 槽位相同且key与之前的相等,直接修改应用
+    >   if (p.hash == hash &&
+    >       ((k = p.key) == key || (key != null && key.equals(k))))
+    >       e = p;
+    >   // 这个槽位对应的是个树
+    >   else if (p instanceof TreeNode)
+    >       e = ((TreeNode<K,V>)p).putTreeVal(this, tab, hash, key, value);
+    >   else {
+    >   // 否则是链表
+    >   // 遍历链表
+    >       for (int binCount = 0; ; ++binCount) {
+    >            if ((e = p.next) == null) {
+    >                p.next = newNode(hash, key, value, null);
+    >                  // 转成树的阈值 默认为 8 
+    >                if (binCount >= TREEIFY_THRESHOLD - 1) // -1 for 1st
+    >                    treeifyBin(tab, hash);
+    >                break;
+    >            }
+    >            if (e.hash == hash &&
+    >                ((k = e.key) == key || (key != null && key.equals(k))))
+    >                break;
+    >            p = e;
+    >        }
+    >   }
+    > 
+    > ```
+##### Static utilities
+
 - static final int hash(Object key) {
           int h;
           return (key == null) ? 0 : (h = key.hashCode()) ^ (h >>> 16);
       } 为什么 要左移16位呢?
-    > 因为 在速度，实用性和比特位之间分布需要考虑,因为在比特位分布上得不到好处,还有hashmap应用了树结构解决了hash冲突,还有因为表结构的限制 高位得不到计算,所以应用了高位的比特位 左移然后异或方式来处理key,
-    >
+    > 因为 在速度,实用性和比特位之间分布需要考虑,因为在比特位分布上得不到好处,还有hashmap应用了树结构解决了hash冲突,还有因为表结构的限制 高位得不到计算,所以应用了高位的比特位 左移然后异或方式来处理key,
+    > 当 hashmap 的长度大于 16 了呢?
     **`java.lang.Object.hashCode`**的方法注释是
     hashcode 方法说白了就是提供对象 到 int 的映射 省去一个个比较对象里面的属性.
   This method is supported for the benefit of hash tables such as those provided by {@link java.util.HashMap}
@@ -25,4 +70,10 @@
    - 在整个java程序中,在不改变对象的前提下 equals 调用多少次都是一样的
    - 如果 此对象调用了 equals 返回的结果是 true的话,他们的hashcode方法返回的int必须相同
    - 如果 此对象调用的 equals 返回的结果是 false的话,他们的hashcode返回的int必须不相同
-  
+   
+##### hashmap 总结:
+   - hashmap 是什么,是一个 k,v的容器,通过一个 tab 数组 去存放 kv 的键值对,可以通过键去找到对应的值
+   - 1.8 之后的hashMap
+
+#### AQS
+##### 成员变量
