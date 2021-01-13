@@ -5,7 +5,21 @@
 - `int UNTREEIFY_THRESHOLD = 6` 
     树大小小于6的时候转化为链表
 - `int MIN_TREEIFY_CAPACITY = 64`
-     整个hashmap最小必须要树化的容量
+    整个hashmap最小必须要树化的容量
+- `DEFAULT_INITIAL_CAPACITY = 1 << 4`
+    默认的数组大小
+- `DEFAULT_LOAD_FACTOR = 0.75f;`
+    默认的负载因子 0.75 
+##### 成员变量
+-  `threshold` 
+    如果大于阈值的话会重新hash
+    //更新
+    > resize() {
+    > newThr = (int)(DEFAULT_LOAD_FACTOR * DEFAULT_INITIAL_CAPACITY);
+    > }
+    > if (++size > threshold)
+    >           resize();
+
 ##### Public operations
 - 构造函数
 `public HashMap(int initialCapacity, float loadFactor)`
