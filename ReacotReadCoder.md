@@ -12,13 +12,10 @@
 > 地表达静态(如数组)或动态(如事件发射器)数据流。
 > — https://en.wikipedia.org/wiki/Reactive_programming
 ### reactor 3.x 
-> Reactor 是第4代反应式库,给予 `反应式流规范`,为了创建没有阻塞的jvm应用程序
+> Reactor 是第4代反应式库,给予 `响应式规范`,为了创建没有阻塞的jvm应用程序
 > Reactor is a fourth-generation reactive library, based on the `Reactive Streams specification`, for building non-blocking applications on the JVM
 
-创建流的方式有
-```java
 
-```
 # webflux与传统的req 与 resp模式的区别
 1. req 与 resp的在同一个线程上。当线程数量达到一定数量后，会出现失败的情况。
 而webflux则不会。

@@ -96,18 +96,19 @@
    - 线程如何进队
 #### 缓存更新的套路
     cache aside patten
-        读先读缓存,如果没有,读数据库,读到写入缓存
+        读先读缓存,如果没有,读数据库,读到写入缓存 (0,1)
         更新在更新数据库,然后再让缓存失效
-        有问题,因为读的操作比写的操作快所以没问题
-    read through patten
+        有问题,因为读的操作比写的操作快所以没问题 (1,-1)
+    read through patten (0,1)
         由缓存来读
-    write through patten
+    write through patten 
         由缓存来写
-    write behind the cache patten
+    write behind the cache patten 
         异步写
 #### 数据库
    - 事务的实现
-        事务数组分三段已提交,未提交,未开始事务,打快照,
+        事务数组分三段已提交,未提交,未开始事务,
+        然后给每个事务打个快照,在事务中读取到的数据或者使用到的数据都有这个row_tx_id
+        这样就保证了,在事务中的视图是一致的.
    - 读提交与可重复读的区别
-   - 
 
