@@ -16,6 +16,28 @@
 > Reactor is a fourth-generation reactive library, based on the `Reactive Streams specification`, for building non-blocking applications on the JVM
 
 
+### 反应式规范 只规定了 4 个接口,如何让他们工作的呢?
+> 就这4个接口,就把程序构建了.
+#### org.reactivestreams:reactive-streams:1.0.3
+```java
+public interface Processor<T, R> extends Subscriber<T>, Publisher<R> {
+}
+public interface Subscriber<T> {
+     void onSubscribe(Subscription s);
+     void onNext(T t);
+     void onError(Throwable t);
+     void onComplete();
+}
+public interface Subscription {
+     void request(long n);
+     void cancel();
+}
+public interface Publisher<T> {
+     void subscribe(Subscriber<? super T> s);
+}
+```
+
+
 # webflux与传统的req 与 resp模式的区别
 1. req 与 resp的在同一个线程上。当线程数量达到一定数量后，会出现失败的情况。
 而webflux则不会。
