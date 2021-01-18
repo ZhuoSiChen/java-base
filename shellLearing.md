@@ -22,7 +22,7 @@ for i in {1..100} ; do
       "additionalInfo": {
       "processEngine": "string",
       "useEngine": 0
-      }}';} 2> bb.txt`
+      }}';} 2>> bb.txt`
 done
 cat bb.txt | grep real |awk  '{print substr($2,6,2)}'|awk '{sum+=$1} END {print "Average = ", sum/NR}'
 ```
