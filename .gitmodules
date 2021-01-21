@@ -1,0 +1,3 @@
+[submodule "essential-netty-in-action"]
+	path = essential-netty-in-action
+	url = git@github.com:waylau/essential-netty-in-action.git
