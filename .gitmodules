@@ -1,3 +1,9 @@
 [submodule "essential-netty-in-action"]
 	path = essential-netty-in-action
 	url = git@github.com:waylau/essential-netty-in-action.git
+[submodule "netty-in-action"]
+	path = netty-in-action
+	url = git@github.com:ZhuoSiChen/netty-in-action.git
+[submodule "reactor-netty"]
+	path = reactor-netty
+	url = git@github.com:reactor/reactor-netty.git

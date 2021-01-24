@@ -362,3 +362,8 @@ Linux                             2017-09-15                          EPOLL(7)
  
 - JDK 的实现是水平触发,而 Netty 的(默认的)是边沿触发。有关的详细信息参见 epoll 在维基百科上的
 解释:http://en.wikipedia.org/wiki/Epoll - Triggering_modes。
+
+# Reactor Netty
+1. 线程模型?读写如何做到不在同一线程上的?
+2. 如何做到背压的? 背压发生时是怎么处理的?
+# 下一步 RSocket
