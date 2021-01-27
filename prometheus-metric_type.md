@@ -5,6 +5,8 @@
 ####  Histogram 直方图
 The histogram metric type measures the frequency of value observations that fall into specific predefined buckets.
 - 直方图是测量观察值在预定义桶的分配频率
+ 1s,2s,3s,4s,5s
+- 请求 成功率  次数
 #### Summaries 摘要
 摘要和直方图有很多相似之处。总结在直方图之前，建议尽可能使用直方图。值得注意的是直方图和摘要之间的主要区别：
 - 使用直方图，可在Prometheus服务器上计算分位数。使用摘要，它们在应用程序服务器上进行计算。
