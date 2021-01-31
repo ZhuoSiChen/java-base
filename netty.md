@@ -1004,6 +1004,11 @@ epoll_create()
 当我们调用 epoll_wait 的时候就是从这个 rdlist 中取出相应的事件进行处理.
 ![epool.jpg](./image/epoll.jpg)
 
+### poll
+
+
+### select 标准
+是 POSIX (可移植操作系统接口) 文件系统  标准 提供的接口
 
 
 
