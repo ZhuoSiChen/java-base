@@ -63,10 +63,10 @@ DESCRIPTION
        triggered (ET) and as level-triggered (LT).  The difference between the
        two mechanisms can be described as follows.  Suppose that this scenario
        happens:
-
+       假设有以下场景:
        1. The file descriptor that represents the read side of a pipe (rfd) is
           registered on the epoll instance.
-
+       
        2. A pipe writer writes 2 kB of data on the write side of the pipe.
 
        3. A call to epoll_wait(2) is done that will return rfd as a ready file
