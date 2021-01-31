@@ -5,7 +5,7 @@
   简化了开发过程,同时也最大限度地提高了可测试性、模块化以及代码的可重用性。
   
 #### Netty 抽象
-- Channel — Socket ;
+- Channel — Socket 
 - EventLoop —控制流、多线程处理、并发;
 - ChannelFuture —异步通知。
 
@@ -994,6 +994,19 @@ Linux                             2017-09-15                           POLL(2)
 ``` 
 - JDK 的实现是水平触发,而 Netty 的(默认的)是边沿触发。有关的详细信息参见 epoll 在维基百科上的
 解释:http://en.wikipedia.org/wiki/Epoll - Triggering_modes。
+
+### epoll
+epoll_create()
+创建一个 epfd 这个 epfd 在内核空间申请缓存用来存放 红黑树
+当我们调用 epoll_ctl() 感兴趣的事件 的时候就是在这个红黑树 添加与删除节点
+在系统调用添加节点时会把 回调函数 传进去. 
+这个回调函数的作用就是把就绪的事件添加到准备链表上。
+当我们调用 epoll_wait 的时候就是从这个 rdlist 中取出相应的事件进行处理.
+![epool.jpg](./image/epoll.jpg)
+
+
+
+
 
 # Reactor Netty
 1. 线程模型?读写如何做到不在同一线程上的?
