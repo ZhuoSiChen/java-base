@@ -1022,3 +1022,4 @@ epoll_create()
 # 下一步 RSocket
 
 [What is event loop](https://gist.github.com/kassane/f2330ef44b070f4a5fa9d59c770f68e9)
+[C10K](www.kegel.com/c10k.html)
