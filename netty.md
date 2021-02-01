@@ -1008,7 +1008,10 @@ epoll_create()
 
 
 ### select 标准
-是 POSIX (可移植操作系统接口) 文件系统  标准 提供的接口
+
+是 POSIX (可移植操作系统接口) 文件系统标准提供的接口
+
+每次都select 1024 个文件秒速符 
 
 
 
@@ -1017,3 +1020,5 @@ epoll_create()
 1. 线程模型?读写如何做到不在同一线程上的?
 2. 如何做到背压的? 背压发生时是怎么处理的?
 # 下一步 RSocket
+
+[What is event loop](https://gist.github.com/kassane/f2330ef44b070f4a5fa9d59c770f68e9)
