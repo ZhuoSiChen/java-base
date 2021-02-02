@@ -1016,6 +1016,98 @@ epoll_create()
 
 # Reactor Netty
 1. 线程模型?读写如何做到不在同一线程上的?
+```java
+TcpServer server =
+    TcpServer.create()
+             .port(PORT)
+             .wiretap(WIRETAP)
+             .handle((in, out) -> out.send(in.receive().retain()));
+```
+```java
+TcpServer server =
+    TcpServer.create()
+        return TcpServerBind.INSTANCE;
+	static final TcpServerBind INSTANCE = new TcpServerBind();
+        Map<ChannelOption<?>, Boolean> childOptions = new HashMap<>(2);
+        		childOptions.put(ChannelOption.AUTO_READ, false);
+        		childOptions.put(ChannelOption.TCP_NODELAY, true);
+        		this.config = new TcpServerConfig(
+        				Collections.singletonMap(ChannelOption.SO_REUSEADDR, true),//设置 Channel 参数
+        				childOptions,
+        				() -> new InetSocketAddress(DEFAULT_PORT));
+```
+io.netty.channel.ChannelOption
+```java
+    public static final ChannelOption<ByteBufAllocator> ALLOCATOR = valueOf("ALLOCATOR");
+    public static final ChannelOption<RecvByteBufAllocator> RCVBUF_ALLOCATOR = valueOf("RCVBUF_ALLOCATOR");
+    public static final ChannelOption<MessageSizeEstimator> MESSAGE_SIZE_ESTIMATOR = valueOf("MESSAGE_SIZE_ESTIMATOR");
+
+    public static final ChannelOption<Integer> CONNECT_TIMEOUT_MILLIS = valueOf("CONNECT_TIMEOUT_MILLIS");
+    /**
+     * @deprecated Use {@link MaxMessagesRecvByteBufAllocator}
+     * and {@link MaxMessagesRecvByteBufAllocator#maxMessagesPerRead(int)}.
+     */
+    @Deprecated
+    public static final ChannelOption<Integer> MAX_MESSAGES_PER_READ = valueOf("MAX_MESSAGES_PER_READ");
+    public static final ChannelOption<Integer> WRITE_SPIN_COUNT = valueOf("WRITE_SPIN_COUNT");
+    /**
+     * @deprecated Use {@link #WRITE_BUFFER_WATER_MARK}
+     */
+    @Deprecated
+    public static final ChannelOption<Integer> WRITE_BUFFER_HIGH_WATER_MARK = valueOf("WRITE_BUFFER_HIGH_WATER_MARK");
+    /**
+     * @deprecated Use {@link #WRITE_BUFFER_WATER_MARK}
+     */
+    @Deprecated
+    public static final ChannelOption<Integer> WRITE_BUFFER_LOW_WATER_MARK = valueOf("WRITE_BUFFER_LOW_WATER_MARK");
+    public static final ChannelOption<WriteBufferWaterMark> WRITE_BUFFER_WATER_MARK =
+            valueOf("WRITE_BUFFER_WATER_MARK");
+
+    public static final ChannelOption<Boolean> ALLOW_HALF_CLOSURE = valueOf("ALLOW_HALF_CLOSURE");
+    public static final ChannelOption<Boolean> AUTO_READ = valueOf("AUTO_READ");
+
+    /**
+     * If {@code true} then the {@link Channel} is closed automatically and immediately on write failure.
+     * The default value is {@code true}.
+     */
+    public static final ChannelOption<Boolean> AUTO_CLOSE = valueOf("AUTO_CLOSE");
+
+    public static final ChannelOption<Boolean> SO_BROADCAST = valueOf("SO_BROADCAST");
+    public static final ChannelOption<Boolean> SO_KEEPALIVE = valueOf("SO_KEEPALIVE");
+    public static final ChannelOption<Integer> SO_SNDBUF = valueOf("SO_SNDBUF");
+    public static final ChannelOption<Integer> SO_RCVBUF = valueOf("SO_RCVBUF");
+    public static final ChannelOption<Boolean> SO_REUSEADDR = valueOf("SO_REUSEADDR");
+    public static final ChannelOption<Integer> SO_LINGER = valueOf("SO_LINGER");
+    public static final ChannelOption<Integer> SO_BACKLOG = valueOf("SO_BACKLOG");
+    public static final ChannelOption<Integer> SO_TIMEOUT = valueOf("SO_TIMEOUT");
+
+    public static final ChannelOption<Integer> IP_TOS = valueOf("IP_TOS");
+    public static final ChannelOption<InetAddress> IP_MULTICAST_ADDR = valueOf("IP_MULTICAST_ADDR");
+    public static final ChannelOption<NetworkInterface> IP_MULTICAST_IF = valueOf("IP_MULTICAST_IF");
+    public static final ChannelOption<Integer> IP_MULTICAST_TTL = valueOf("IP_MULTICAST_TTL");
+    public static final ChannelOption<Boolean> IP_MULTICAST_LOOP_DISABLED = valueOf("IP_MULTICAST_LOOP_DISABLED");
+
+    public static final ChannelOption<Boolean> TCP_NODELAY = valueOf("TCP_NODELAY");
+
+    @Deprecated
+    public static final ChannelOption<Boolean> DATAGRAM_CHANNEL_ACTIVE_ON_REGISTRATION =
+            valueOf("DATAGRAM_CHANNEL_ACTIVE_ON_REGISTRATION");
+
+    public static final ChannelOption<Boolean> SINGLE_EVENTEXECUTOR_PER_GROUP =
+            valueOf("SINGLE_EVENTEXECUTOR_PER_GROUP");
+```
+- SO_REUSEADDR
+    > Q:编写 TCP/SOCK_STREAM 服务程序时，SO_REUSEADDR到底什么意思？
+    > A:这个套接字选项通知内核，如果端口忙，但TCP状态位于 TIME_WAIT ，可以重用端口。如果端口忙，而TCP状态位于其他状态，重用端口时依旧得到一个错误
+    > 息，指明"地址已经使用中"。如果你的服务程序停止后想立即重启，而新套接字依旧使用同一端口，此时SO_REUSEADDR 选项非常有用。必须意识到，此时任何非期
+    > 望数据到达，都可能导致服务程序反应混乱，不过这只是一种可能，事实上很不可能。
+    [SO_REUSEADDR](https://www.jianshu.com/p/711be2f1ec6a)
+- TCP_NODELAY
+    > Nagle算法描述
+    > 该算法要求一个TCP连接上最多只能有一个未被确认的小分组，在该小分组的确认到来之前，不能发送其他小分组。
+    [TCP_NODELAY](https://www.jianshu.com/p/ccafdeda)
+
+
 2. 如何做到背压的? 背压发生时是怎么处理的?
 # 下一步 RSocket
 
