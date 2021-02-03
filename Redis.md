@@ -1,6 +1,6 @@
 Redis remote dictionary service(远程字典表服务)
 一个远程的缓存
-缓存都有易失的
+缓存都是易失的
 缓存的持久化方式
 缓存都有时间
 缓存过期时间
