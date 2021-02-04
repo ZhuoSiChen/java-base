@@ -24,7 +24,40 @@ Redis 问题?
 缓存过期策略
 缓存淘汰策略
 缓存雪崩
+描述：所有key在同一时间内消失.
+fix：在一个时间范围内 加随机函数.
 缓存穿透
-缓存击穿
+描述：查询不存在的key导致所有的请求都打到数据库.
+fix：把所有的数据存到 `布隆过滤器` 上
+次要 fix: 缓存不存在的key
 
+缓存更新的策略：
+Cache aside pattern
+
+```sequence
+client->redis: get data
+client->database: I am good thanks!
+database->redis: 
+redis->client:
+```
+##### 读：
+先读缓存,在读数据库
+    1. 缓存存在返回 
+    2. 缓存没读到
+        1. 读数据库
+        2. 写入缓存
+##### 写：
+先写数据库,再让缓存失效
+    1. 先写数据库
+    2. 让缓存失效
+Cache aside pattern
+能够行的通的原因是
+    1.读数据库比写数据库快
+    也就是 
+    读.2
+    比
+    写.1
+    快
+    
+    
 Redis集群方式?
