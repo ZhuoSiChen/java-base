@@ -26,3 +26,8 @@ for i in {1..100} ; do
 done
 cat bb.txt | grep real |awk  '{print substr($2,6,2)}'|awk '{sum+=$1} END {print "Average = ", sum/NR}'
 ```
+
+#### 查找多个文件是否包含有 req
+```shell
+grep -l req log/*
+```
