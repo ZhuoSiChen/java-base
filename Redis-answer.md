@@ -71,13 +71,6 @@ Cache aside pattern
     1. 先写数据库
     2. 让缓存失效
 Cache aside pattern
-能够行的通的原因是
-    1.读数据库比写数据库快
-    也就是 
-    读.2
-    比
-    写.1
-    快
     
     
 Redis集群方式?
