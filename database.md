@@ -24,4 +24,4 @@
 
 #### SQL explain 主要的字段都有什么值?
 
-
+#### 2PL two phase lock
