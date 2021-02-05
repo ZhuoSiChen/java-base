@@ -34,12 +34,32 @@ fix：把所有的数据存到 `布隆过滤器` 上
 缓存更新的策略：
 Cache aside pattern
 
-```sequence
-client->redis: get data
-client->database: I am good thanks!
-database->redis: 
-redis->client:
+```mermaid
+%% cache aside patten read path
+  sequenceDiagram
+    client->>redis: 1.had data?
+    alt had data
+    redis->>client: 2.return data
+    else not had data
+    redis->>client: 3.just return
+    
+    client->>datasource: 4. get data
+    datasource->>client: 5.return data
+    client->>redis: 6.writer redis
+    redis->>client: 7.ok
+    end
+
 ```
+
+```mermaid
+%% cache aside patten write path
+  sequenceDiagram
+    client->>datasource: 1.write data.
+    datasource->>client: 2.ok
+    client->>redis:3.invald data
+    redis->>client:4.ok
+```
+
 ##### 读：
 先读缓存,在读数据库
     1. 缓存存在返回 
