@@ -16,5 +16,7 @@ Redis 问题?
 
 Redis有哪些数据结构?
 
-Redis集群方式?
+Redis与数据库的同步策略?
+缓存更新的策略?
 
+Redis集群方式?

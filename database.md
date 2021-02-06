@@ -20,5 +20,8 @@
 
 #### SQL 有哪些锁? 分别都用来控制什么?
 
+#### SQL 视图用来干什么?
 
+#### SQL explain 主要的字段都有什么值?
 
+#### 2PL two phase lock
