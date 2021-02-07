@@ -7,14 +7,17 @@ Redis remote dictionary service(远程字典表服务)
 缓存都有大小限制
 淘汰策略
 
-Redis 问题?
+#### Redis 问题?
 缓存过期策略
 缓存淘汰策略
 缓存雪崩
 缓存穿透
 缓存击穿
 
-Redis与数据库的同步策略?
+#### Redis与数据库的同步策略?
 缓存更新的策略?
 
-Redis集群方式?
+#### Redis集群方式?
+sentinal  cluster
+
+#### cluster 一致性 hash 算法?
