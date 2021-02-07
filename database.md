@@ -25,3 +25,17 @@
 #### SQL explain 主要的字段都有什么值?
 
 #### 2PL two phase lock
+
+#### 5.6 版本的索引下推.
+假设有一张people表,包含字段name、address、first_name
+
+索引为(name,address,first_name)
+
+```shell
+SELECT * FROM person WHERE `name` = "1" AND `address` LIKE "%222" and 
+```
+简单的来说就是. 在索引上判断 where 条件
+
+查看执行计划时发现extra一栏中有Using index condition信息，说明使用了索引下推。
+
+https://juejin.cn/post/6844904017332535304
