@@ -39,3 +39,6 @@ SELECT * FROM person WHERE `name` = "1" AND `address` LIKE "%222" and
 查看执行计划时发现extra一栏中有Using index condition信息，说明使用了索引下推。
 
 https://juejin.cn/post/6844904017332535304
+
+
+https://github.com/ChiangShin/call-me-crud-boy/blob/3952d56c18b1769b63e72fe83f75b139d5af8a2d/%E9%9D%A2%E8%AF%95%E7%AC%94%E8%AE%B0/mysql.md
