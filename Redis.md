@@ -17,6 +17,10 @@ Redis 问题?
 Redis有哪些数据结构?
 
 Redis与数据库的同步策略?
+#### Redis与数据库的同步策略?
 缓存更新的策略?
 
-Redis集群方式?
+#### Redis集群方式?
+sentinal  cluster
+
+#### cluster 一致性 hash 算法?
