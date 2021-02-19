@@ -1,6 +1,5 @@
 package com.demo.study.redis;
 
-import lombok.Data;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
@@ -59,7 +58,9 @@ class RedisApplicationTests {
     public void testDeleted() {
         stringRedisTemplate.delete("test-string-value");
     }
+
     /** simple String value end **/
+
 
     /**
      * distributeLock ops
@@ -133,10 +134,11 @@ class RedisApplicationTests {
         System.out.println(rightFirstElement);
     }
 
-    /**
-     * list ops end
-     **/
+    /** list ops end **/
 
+    /**
+     * hash ops start
+     */
     @Test
     public void testHashPut() {
         redisTemplate.opsForHash().put("TestHash", "FirstElement", "Hello,Redis hash.");
@@ -154,8 +156,12 @@ class RedisApplicationTests {
         redisTemplate.opsForHash().delete("TestHash", "FirstElement");
         Assertions.assertTrue(redisTemplate.opsForHash().hasKey("TestHash", "FirstElement"));
     }
+    /** hash ops end **/
 
 
+    /**
+     * set ops start
+     */
     @Test
     public void testSetAdd() {
         redisTemplate.opsForSet().add("TestSet", "e1", "e2", "e3");
@@ -176,13 +182,11 @@ class RedisApplicationTests {
         Assertions.assertEquals("e3", testSet.toArray()[0]);
     }
 
-    @Data
-    public static class User{
-        public String id;
-        public String name;
-    }
+    /** set ops end **/
 
-
+    /**
+     * zset ops start
+     */
     @Test
     public void testZsetAdd() {
         String key = "TestZset";
@@ -197,7 +201,6 @@ class RedisApplicationTests {
         Set rangeByLex = redisTemplate.opsForZSet().rangeByLex(key, RedisZSetCommands.Range.range(), RedisZSetCommands.Limit.limit());
         System.out.println(range);
         System.out.println(rangeByLex);
-        Set testSet = redisTemplate.opsForSet().members("TestSet");
-        Assertions.assertEquals("e3", testSet.toArray()[0]);
     }
+    /** zset ops end **/
 }

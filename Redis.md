@@ -21,3 +21,11 @@ Redis remote dictionary service(远程字典表服务)
 sentinal  cluster
 
 #### cluster 一致性 hash 算法?
+
+#### redis 性能优化建议?
+
+https://learnku.com/articles/42763
+
+#### redis 分布式锁
+
+https://xiaomi-info.github.io/2019/12/17/redis-distributed-lock/
