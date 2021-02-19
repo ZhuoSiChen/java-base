@@ -8,7 +8,7 @@
 
 #### SQL 优化方式?
 
-#### SQL 事务的实现?
+#### SQL 事务的实现? and 什么是事务? and 为什么需要事务?
 
 #### SQL 有哪些锁? 分别都用来控制什么?
 X锁：
@@ -17,18 +17,21 @@ S锁：
 
 
 #### mysql中的锁算法?
-innodb存储引擎有三种行锁算法,分别是
-Record Lock：单个行记录上的锁
-Gap Lock：间隙锁 锁定一个范围，但不包含记录本身
-Next-key lock：Gap Lock + Record Lock 锁定一个范围 并且锁定记录本身
+> innodb存储引擎有三种行锁算法,分别是
+> Record Lock：单个行记录上的锁
+> Gap Lock：间隙锁 锁定一个范围，但不包含记录本身
+> 保证 在可重复读下 前后两次查询一致
+> Next-key lock：Gap Lock + Record Lock 锁定一个范围 并且锁定记录本身
 
+>[锁相关](https://www.zhihu.com/column/c_1104074839660294144)
 
-#### SQL MVCC是什么?
-是用来并发控制的,因为mysql只要两种锁,
+#### SQL MVCC是什么? 为什么需要MVCC? MVCC是如何工作的? 
+>是用来并发控制的,因为mysql只要两种锁,
 当 mysql 存在多个并发控制的事务时,通过给对应行记录打上快照.
 也就是 transation Id,来控制多个事务是回滚还是提交.
 而不用,等待锁的释放.
 
+> [MVCC](https://zhuanlan.zhihu.com/p/52977862)
 
 #### SQL innodb 引擎与 Myisam 引擎的区别
 InnoDB支持事务,行锁
