@@ -21,21 +21,55 @@
 
 #### SQL 事务的实现?
 
+#### SQL 有哪些锁? 分别都用来控制什么?
+X锁：
+和
+S锁：
+
+
+#### mysql中的锁算法?
+innodb存储引擎有三种行锁算法,分别是
+Record Lock：单个行记录上的锁
+Gap Lock：间隙锁 锁定一个范围，但不包含记录本身
+Next-key lock：Gap Lock + Record Lock 锁定一个范围 并且锁定记录本身
+
+
 #### SQL MVCC是什么?
+是用来并发控制的,因为mysql只要两种锁,
+当 mysql 存在多个并发控制的事务时,通过给对应行记录打上快照.
+也就是 transation Id,来控制多个事务是回滚还是提交.
+而不用,等待锁的释放.
+
 
 #### SQL innodb 引擎与 Myisam 引擎的区别
+InnoDB支持事务,行锁
+MyIsam不支持事务,表锁
 
-#### SQL 索引类型
+#### SQL 索引类型? 区别和联系?
+|      |  数据结构 |类型|
+| ---- | ---- | ----      |
+| 主键索引|B+树|  聚簇      |
+| 唯一索引|B+树|  非聚簇    |
+| 普通索引|B+树|  非聚簇    |
+
 
 #### SQL 事务的隔离级别
 
-#### SQL 有哪些锁? 分别都用来控制什么?
+
 
 #### SQL 视图用来干什么?
 
 #### SQL explain 主要的字段都有什么值?
 
 #### 2PL two phase lock
+> Expanding phase (aka Growing phase): locks are acquired and no locks are released (the number of locks can only increase).
+Shrinking phase (aka Contracting phase): locks are released and no locks are acquired.
+第一阶段是.描述锁扩从：也就是一旦获取了锁 就不能释放锁,锁的数量也就只能一直增加
+第二阶段是.描述锁收缩：也就是一旦释放了锁就不能 获取锁
+
+[WIKI 2PL](https://en.wikipedia.org/wiki/Two-phase_locking)
+
+2PL是为了保证多个事务能正确运行的
 
 #### 5.6 版本的索引下推.
 假设有一张people表,包含字段name、address、first_name
