@@ -16,6 +16,12 @@
 #### SQL select 语句的执行方式?
 
 #### SQL 的 join 实现?
+join 算法普通的的实现是
+查找到一条然后去另一个表找匹配的一条数据
+如果内层循环使用了索引的话join的表建了索引的话,
+则会走索引,但是一条条走索引的话还是太慢了.
+所以mysql用 join buffer.也就是先去一定量的数据.
+然后再去join表查找.
 
 [join实现](https://zhuanlan.zhihu.com/p/54275505)
 
