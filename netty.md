@@ -162,15 +162,17 @@ DESCRIPTION
                perror("epoll_create1");
                exit(EXIT_FAILURE);
            }
-
+           //设置监听的文件描述符
            ev.events = EPOLLIN;
            ev.data.fd = listen_sock;
+           //把监听的文件描述加入到epoll实例中
            if (epoll_ctl(epollfd, EPOLL_CTL_ADD, listen_sock, &ev) == -1) {
                perror("epoll_ctl: listen_sock");
                exit(EXIT_FAILURE);
            }
 
            for (;;) {
+           //等待事件来临
                nfds = epoll_wait(epollfd, events, MAX_EVENTS, -1);
                if (nfds == -1) {
                    perror("epoll_wait");
@@ -179,15 +181,18 @@ DESCRIPTION
 
                for (n = 0; n < nfds; ++n) {
                    if (events[n].data.fd == listen_sock) {
+                       //等到链接时间来了,拿到一个新的 socket 文件描述
                        conn_sock = accept(listen_sock,
                                           (struct sockaddr *) &addr, &addrlen);
                        if (conn_sock == -1) {
                            perror("accept");
                            exit(EXIT_FAILURE);
                        }
+                       //在此设置感兴趣的事件,例如读写.
                        setnonblocking(conn_sock);
                        ev.events = EPOLLIN | EPOLLET;
                        ev.data.fd = conn_sock;
+                       // 把 socket 文件描述 加入到epoll实例中.
                        if (epoll_ctl(epollfd, EPOLL_CTL_ADD, conn_sock,
                                    &ev) == -1) {
                            perror("epoll_ctl: conn_sock");

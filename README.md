@@ -89,11 +89,7 @@
    - hashmap 是什么,是一个 k,v的容器,通过一个 tab 数组 去存放 kv 的键值对,可以通过键去找到对应的值
    - 1.8 之后的 hashMap
 
-#### AQS 抽象队列同步器
-   - 在第一个线程运行到 ReentrantLock 对象的 lock 方法时, 会用原子操作把 AQS的 state 设为 1 表示这个AQS被占用,然后把会把当前线程写入到这个抽象队列同步器的一个成员变量`setExclusiveOwnerThread(Thread.currentThread());`为了可重入与解锁的时候
-   - 把运行的线程用node串起来
-   - 公平与不公平的区别.
-   - 线程如何进队
+
 #### 缓存更新的套路
     cache aside patten
         读先读缓存,如果没有,读数据库,读到写入缓存
@@ -105,15 +101,7 @@
         由缓存来写
     write behind the cache patten
         异步写
-#### 数据库
-   - 事务的实现
-        每个事务开始时,MySQL会全局分配一个 transaction id.
-        每行的
-        事务数组分三段已提交,未提交,未开始事务,
-        开始事务时,数据库会创建一个视图.
-        然后给每个事务打个快照,在事务中读取到的数据或者使用到的数据都有这个 row_tx_id
-        这样就保证了,在事务中的视图是一致的.
-   - 读提交与可重复读的区别
+
    
 #### Elasticsearch 
    - mapping 的也就是表结构,决定了查询的接口
