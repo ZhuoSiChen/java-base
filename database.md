@@ -17,7 +17,7 @@
 
 #### SQL 的 join 实现?
 
-(join实现)[https://zhuanlan.zhihu.com/p/54275505]
+[join实现](https://zhuanlan.zhihu.com/p/54275505)
 
 #### SQL 优化方式?
 
