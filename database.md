@@ -72,6 +72,18 @@ MyIsam不支持事务,表锁
 #### SQL 视图用来干什么?
 
 #### SQL explain 主要的字段都有什么值?
+type字段
+有eq_ref,ref,index,range,all等字段
+eq_ref 说明查询语句走了索引.效果还是比较好的.
+除了 all 之外全部都是走了索引的查找类型.
+row 字段
+说明该语句扫描了多少个行记录.
+extra 字段
+说明该查询语句是否使用了覆盖索引,与是否使用了临时表,文件排序等.
+key 字段
+说明该查询语句用到了那些索引
+
+[explain 解释](https://www.jianshu.com/p/8fab76bbf448)
 
 #### 2PL two phase lock
 > Expanding phase (aka Growing phase): locks are acquired and no locks are released (the number of locks can only increase).
