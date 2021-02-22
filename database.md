@@ -26,6 +26,8 @@ join 算法普通的的实现是
 [join实现](https://zhuanlan.zhihu.com/p/54275505)
 
 #### SQL 优化方式?
+1.分页的处理.
+2.explain的执行计划的分析.
 
 #### SQL 事务的实现? and 什么是事务? and 为什么需要事务?
 
