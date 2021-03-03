@@ -31,3 +31,5 @@ cat bb.txt | grep real |awk  '{print substr($2,6,2)}'|awk '{sum+=$1} END {print 
 ```shell
 grep -l req log/*
 ```
+
+[awk](https://lvs071103.gitbooks.io/awk/content/awk_syntax_and_basic_commands/ofs-.html)
