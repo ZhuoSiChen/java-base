@@ -29,16 +29,17 @@ public class TestFuture {
         Random random = new Random(10);
         while(!completableFuture.isDone()){
             Thread.sleep(100);
-            if (random.nextInt() > 5){
+            if (random.nextInt() > 8){
                 System.out.println("cancel");
                 completableFuture.cancel(true);
-                System.out.println(completableFuture.);
+                System.out.println();
             }
             System.out.println(System.currentTimeMillis()+" is done "+completableFuture.isDone());
         }
         String s = completableFuture.get();
         System.out.println("get from future:"+s);
-        System.out.println("out of while is done "+completableFuture.isDone());
+        System.out.println("is cancelled :"+completableFuture.isCancelled());
+        System.out.println("is done "+completableFuture.isDone());
 
     }
 }
