@@ -10,15 +10,19 @@
 > 这意味着可以通过所使用的编程语言轻松
 > 地表达静态(如数组)或动态(如事件发射器)数据流。
 > — https://en.wikipedia.org/wiki/Reactive_programming 
+
 ### reactor 3.x 
+
 > Reactor 是第4代反应式库,给予 `响应式规范`,为了创建没有阻塞的jvm应用程序
 > Reactor is a fourth-generation reactive library, based on the `Reactive Streams specification`, for building non-blocking applications on the JVM
+>
+### 为什么需要反应式编程
+
 
 
 ### 反应式规范 只规定了 4 个接口,如何让他们工作的呢?
-> 就这4个接口,就把程序构建了.太厉害了吧!(天才)
-> 
 #### org.reactivestreams:reactive-streams:1.0.3
+
 ```java
 public interface Processor<T, R> extends Subscriber<T>, Publisher<R> {
 }
@@ -36,6 +40,19 @@ public interface Publisher<T> {
      void subscribe(Subscriber<? super T> s);
 }
 ```
+ *** 就这4个接口,就把程序构建了.太厉害了吧!(天才) ***
+```java
+Flux<String> just = Flux.just("tom", "jack", "allen");
+		just.map(s-> s.concat("@qq.com"))
+		    .subscribe(System.out::println);
+```
+
+> 分为 4 个阶段
+>  assemble 组装阶段
+>  subscribe 订阅阶段
+>  onSubscribe 触发订阅阶段
+>  request 请求阶段
+
 
 
 # webflux与传统的req 与 resp模式的区别
