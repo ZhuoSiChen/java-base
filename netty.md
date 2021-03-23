@@ -2,23 +2,23 @@
 - 它的基于 Java NIO 的异步的和事件驱动的实现,保证了高负载下应用程序
 性能的最大化和可伸缩性
 - Netty 也包含了一组设计模式,将应用程序逻辑从网络层解耦,
-  简化了开发过程,同时也最大限度地提高了可测试性、模块化以及代码的可重用性。
+  简化了开发过程,同时也最大限度地提高了可测试性,模块化以及代码的可重用性。
   
 #### Netty 抽象
 - Channel — Socket 
-- EventLoop —控制流、多线程处理、并发;
-- ChannelFuture —异步通知。
+- EventLoop —控制流,多线程处理,并发;
+- ChannelFuture —异步通知.
 
 ##### ChannelPipeline 是什么 ?
     - ChannelPipeline  提供了 ChannelHandler 链的容器
 ##### ChannelHandler 是什么 ?
-  
  > ChannelHandler 安装到 ChannelPipeline 中的过程如下所示:
   一个 ChannelInitializer 的实现被注册到了 ServerBootstrap 中 1 ;
   当 ChannelInitializer.initChannel() 方法被调用时, ChannelInitializer
   将在 ChannelPipeline 中安装一组自定义的 ChannelHandler ;
   ChannelInitializer
   将它自己从 ChannelPipeline 中移除。
+##### ChannelHandlerContext 这个又是什么 ?
 #####什么是边缘触发 
 - man epoll
   [epoll1](https://blog.csdn.net/Eunice_fan1207/article/details/99641348)
@@ -1040,66 +1040,6 @@ TcpServer server =
         				Collections.singletonMap(ChannelOption.SO_REUSEADDR, true),//设置 Channel 参数
         				childOptions,
         				() -> new InetSocketAddress(DEFAULT_PORT));
-```
-io.netty.channel.ChannelOption
-```java
-    public static final ChannelOption<ByteBufAllocator> ALLOCATOR = valueOf("ALLOCATOR");
-    public static final ChannelOption<RecvByteBufAllocator> RCVBUF_ALLOCATOR = valueOf("RCVBUF_ALLOCATOR");
-    public static final ChannelOption<MessageSizeEstimator> MESSAGE_SIZE_ESTIMATOR = valueOf("MESSAGE_SIZE_ESTIMATOR");
-
-    public static final ChannelOption<Integer> CONNECT_TIMEOUT_MILLIS = valueOf("CONNECT_TIMEOUT_MILLIS");
-    /**
-     * @deprecated Use {@link MaxMessagesRecvByteBufAllocator}
-     * and {@link MaxMessagesRecvByteBufAllocator#maxMessagesPerRead(int)}.
-     */
-    @Deprecated
-    public static final ChannelOption<Integer> MAX_MESSAGES_PER_READ = valueOf("MAX_MESSAGES_PER_READ");
-    public static final ChannelOption<Integer> WRITE_SPIN_COUNT = valueOf("WRITE_SPIN_COUNT");
-    /**
-     * @deprecated Use {@link #WRITE_BUFFER_WATER_MARK}
-     */
-    @Deprecated
-    public static final ChannelOption<Integer> WRITE_BUFFER_HIGH_WATER_MARK = valueOf("WRITE_BUFFER_HIGH_WATER_MARK");
-    /**
-     * @deprecated Use {@link #WRITE_BUFFER_WATER_MARK}
-     */
-    @Deprecated
-    public static final ChannelOption<Integer> WRITE_BUFFER_LOW_WATER_MARK = valueOf("WRITE_BUFFER_LOW_WATER_MARK");
-    public static final ChannelOption<WriteBufferWaterMark> WRITE_BUFFER_WATER_MARK =
-            valueOf("WRITE_BUFFER_WATER_MARK");
-
-    public static final ChannelOption<Boolean> ALLOW_HALF_CLOSURE = valueOf("ALLOW_HALF_CLOSURE");
-    public static final ChannelOption<Boolean> AUTO_READ = valueOf("AUTO_READ");
-
-    /**
-     * If {@code true} then the {@link Channel} is closed automatically and immediately on write failure.
-     * The default value is {@code true}.
-     */
-    public static final ChannelOption<Boolean> AUTO_CLOSE = valueOf("AUTO_CLOSE");
-
-    public static final ChannelOption<Boolean> SO_BROADCAST = valueOf("SO_BROADCAST");
-    public static final ChannelOption<Boolean> SO_KEEPALIVE = valueOf("SO_KEEPALIVE");
-    public static final ChannelOption<Integer> SO_SNDBUF = valueOf("SO_SNDBUF");
-    public static final ChannelOption<Integer> SO_RCVBUF = valueOf("SO_RCVBUF");
-    public static final ChannelOption<Boolean> SO_REUSEADDR = valueOf("SO_REUSEADDR");
-    public static final ChannelOption<Integer> SO_LINGER = valueOf("SO_LINGER");
-    public static final ChannelOption<Integer> SO_BACKLOG = valueOf("SO_BACKLOG");
-    public static final ChannelOption<Integer> SO_TIMEOUT = valueOf("SO_TIMEOUT");
-
-    public static final ChannelOption<Integer> IP_TOS = valueOf("IP_TOS");
-    public static final ChannelOption<InetAddress> IP_MULTICAST_ADDR = valueOf("IP_MULTICAST_ADDR");
-    public static final ChannelOption<NetworkInterface> IP_MULTICAST_IF = valueOf("IP_MULTICAST_IF");
-    public static final ChannelOption<Integer> IP_MULTICAST_TTL = valueOf("IP_MULTICAST_TTL");
-    public static final ChannelOption<Boolean> IP_MULTICAST_LOOP_DISABLED = valueOf("IP_MULTICAST_LOOP_DISABLED");
-
-    public static final ChannelOption<Boolean> TCP_NODELAY = valueOf("TCP_NODELAY");
-
-    @Deprecated
-    public static final ChannelOption<Boolean> DATAGRAM_CHANNEL_ACTIVE_ON_REGISTRATION =
-            valueOf("DATAGRAM_CHANNEL_ACTIVE_ON_REGISTRATION");
-
-    public static final ChannelOption<Boolean> SINGLE_EVENTEXECUTOR_PER_GROUP =
-            valueOf("SINGLE_EVENTEXECUTOR_PER_GROUP");
 ```
 - SO_REUSEADDR
     > Q:编写 TCP/SOCK_STREAM 服务程序时，SO_REUSEADDR到底什么意思？
