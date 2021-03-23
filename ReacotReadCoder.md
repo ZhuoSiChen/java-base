@@ -15,10 +15,13 @@
 
 > Reactor 是第4代反应式库,给予 `响应式规范`,为了创建没有阻塞的jvm应用程序
 > Reactor is a fourth-generation reactive library, based on the `Reactive Streams specification`, for building non-blocking applications on the JVM
->
+
 ### 为什么需要反应式编程
-
-
+1.上下游速度不匹配呀.
+例如: 服务A的处理速度是 每秒 5 个请求. 服务 B 的处理速度 每秒 1 个请求.
+如果 A -> B  -> 表示调用依赖
+这个时候就需要 限制 A 的速度了.
+如果 B -> A 这样就不需要
 
 ### 反应式规范 只规定了 4 个接口,如何让他们工作的呢?
 #### org.reactivestreams:reactive-streams:1.0.3
@@ -40,7 +43,8 @@ public interface Publisher<T> {
      void subscribe(Subscriber<? super T> s);
 }
 ```
- *** 就这4个接口,就把程序构建了.太厉害了吧!(天才) ***
+**就这4个接口,就把程序构建了.太厉害了吧!(天才)**
+
 ```java
 Flux<String> just = Flux.just("tom", "jack", "allen");
 		just.map(s-> s.concat("@qq.com"))
