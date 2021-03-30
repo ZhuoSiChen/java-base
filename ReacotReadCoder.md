@@ -11,10 +11,6 @@
 > 地表达静态(如数组)或动态(如事件发射器)数据流。
 > — https://en.wikipedia.org/wiki/Reactive_programming 
 
-### reactor 3.x 
-
-> Reactor 是第4代反应式库,给予 `响应式规范`,为了创建没有阻塞的jvm应用程序
-> Reactor is a fourth-generation reactive library, based on the `Reactive Streams specification`, for building non-blocking applications on the JVM
 
 ### 为什么需要反应式编程
 1.上下游速度不匹配呀.
@@ -22,6 +18,15 @@
 如果 A -> B  -> 表示调用依赖
 这个时候就需要 限制 A 的速度了.
 如果 B -> A 这样就不需要
+
+### reactor 3.x 
+
+> Reactor 是第4代反应式库,给予 `响应式规范`,为了创建没有阻塞的jvm应用程序
+> Reactor is a fourth-generation reactive library, based on the `Reactive Streams specification`, for building non-blocking applications on the JVM
+
+But I still think this method should be added!
+Should I close this issues ?
+
 
 ### 反应式规范 只规定了 4 个接口,如何让他们工作的呢?
 #### org.reactivestreams:reactive-streams:1.0.3
@@ -51,7 +56,7 @@ Flux<String> just = Flux.just("tom", "jack", "allen");
 		    .subscribe(System.out::println);
 ```
 
-> 分为 4 个阶段
+> Reactor 分为 4 个阶段
 >  assemble 组装阶段
 >  subscribe 订阅阶段
 >  onSubscribe 触发订阅阶段
@@ -68,3 +73,4 @@ Flux<String> just = Flux.just("tom", "jack", "allen");
 [大厂实践](https://zhuanlan.zhihu.com/p/152325857)
 [5 Things to Know About Reactive Programming](https://developers.redhat.com/blog/2017/06/30/5-things-to-know-about-reactive-programming/)
 [响应式规范](https://www.reactive-streams.org)
+[](https://github.com/ZhongyangMA/webflux-streaming-demo/wiki/反应式编程概览（中文版）)
