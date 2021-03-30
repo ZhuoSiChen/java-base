@@ -14,6 +14,9 @@ public class TestFuture {
                 e.printStackTrace();
             }
             return "你好呀";
+        }).thenApplyAsync(s -> {
+            System.out.println(s);
+            return s+" hello again";
         });
         System.out.println(" "+completableFuture.isDone());
         System.out.println(completableFuture.isDone());
@@ -29,7 +32,7 @@ public class TestFuture {
         Random random = new Random(10);
         while(!completableFuture.isDone()){
             Thread.sleep(100);
-            if (random.nextInt() > 8){
+            if (random.nextInt(10) > 10){
                 System.out.println("cancel");
                 completableFuture.cancel(true);
                 System.out.println();
