@@ -20,7 +20,24 @@ CPU 密集型进程，使用大量 CPU 会导致平均负载升高，
 
 ### **sysstat** linux系统性能工具
 - **mpstat** 是一个常用的多核 CPU 性能分析工具，用来实时查看每个 CPU 的性能指标，以及所有 CPU 的平均指标。
-- **iostat**
-- **vmstat**
+- **iostat** 
+- **vmstat** 主要用来分析系统的内存使用情况，也常用来分析 CPU 上下文切换和中断的次数。
+- **pidstat** pidstat -w(进程切换指标)/-u（cpu使用指标）/-wt(线程上下文切换指标)） 注意看是自愿上下文切换、还是被动上下文切换
+#### 测试工具
+- stress ： 模拟进程 、 io
+- sysbench ： 模拟线程数
+```shell script
+[root@bj5371 ~]# vmstat 1 
+procs -----------memory---------- ---swap-- -----io---- --system-- -----cpu-----
+ r  b   swpd   free   buff  cache   si   so    bi    bo   in   cs us sy id wa st
+ 0  0   4504 28083036 555648 29767244    0    0     0     7    0    0  0  0 99  0  0	
+ 4  0   4504 28080776 555648 29767736    0    0     0    16 8010 6831  1  0 99  0  0	
+ 1  0   4504 28079628 555648 29768560    0    0     0     0 5798 6201  1  0 99  0  0	
+```
 
 [性能分析文章](https://zhuanlan.zhihu.com/p/74553637)
+
+# Java 性能分析
+            
+[工具](https://netflixtechblog.com/java-in-flames-e763b3d32166)
+[工具使用](http://thoreauz.com/2019/02/16/perf-flameGraph/)
