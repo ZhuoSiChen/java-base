@@ -41,3 +41,4 @@ procs -----------memory---------- ---swap-- -----io---- --system-- -----cpu-----
             
 [工具](https://netflixtechblog.com/java-in-flames-e763b3d32166)
 [工具使用](http://thoreauz.com/2019/02/16/perf-flameGraph/)
+[火焰图解读](http://www.ruanyifeng.com/blog/2017/09/flame-graph.html)
