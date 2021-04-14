@@ -38,7 +38,36 @@ procs -----------memory---------- ---swap-- -----io---- --system-- -----cpu-----
 [性能分析文章](https://zhuanlan.zhihu.com/p/74553637)
 
 # Java 性能分析
+> 
+```shell script
+#查看java进程
+ps -ef
+UID         PID   PPID  C STIME TTY          TIME CMD
+root          1      0  0 12:19 ?        00:00:00 /baymax/bin/dumb-init -- /baymax/bin/run.sh
+root         50      1  0 12:19 ?        00:00:00 /usr/sbin/sshd
+nscd         80      1  0 12:19 ?        00:00:00 /usr/sbin/nscd
+root         91      1  0 12:19 ?        00:00:00 /usr/sbin/crond
+root        145     50  0 12:19 ?        00:00:00 sshd: root@pts/0
+root        147    145  0 12:19 pts/0    00:00:00 -bash
+root        200      1  0 12:21 pts/0    00:00:38 java -server -Djava.io.tmpdir=/home/service/app/content-inf
+root       3019    147  0 15:26 pts/0    00:00:00 ps -ef
+
+# centos7 install perf
+yum install perf
+# install perf-map-agent
+git clone https://github.com/jvm-profiling-tools/perf-map-agent.git
+cd perf-map-agent
+# cmake>=2.8.6
+yum groupinstall "Development Tools"
+yum install make
+cmake .
+make
+
+```
+> 
             
 [工具](https://netflixtechblog.com/java-in-flames-e763b3d32166)
 [工具使用](http://thoreauz.com/2019/02/16/perf-flameGraph/)
 [火焰图解读](http://www.ruanyifeng.com/blog/2017/09/flame-graph.html)
+
+[all in one](https://riboseyim.github.io/2017/10/24/Linux-Perf-Picture/#%E6%89%A9%E5%B1%95%E9%98%85%E8%AF%BB%EF%BC%9A%E7%94%B5%E5%AD%90%E4%B9%A6%E3%80%8ALinux-Perf-Master%E3%80%8B)
