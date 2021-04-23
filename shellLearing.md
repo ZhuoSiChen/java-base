@@ -33,3 +33,15 @@ grep -l req log/*
 ```
 
 [awk](https://lvs071103.gitbooks.io/awk/content/awk_syntax_and_basic_commands/ofs-.html)
+
+## if [ “x${var}" == “x” ]整句的意思是判断${var}是否为空。
+从kafka启动文件中看到的
+```shell script
+#!/bin/bash
+if [ "x$KAFKA_LOG4J_OPTS" = "x" ]; then
+    export KAFKA_LOG4J_OPTS="-Dlog4j.configuration=file:$base_dir/../config/log4j.properties"
+fi
+```
+
+> = 与 == 在 [ ] 中表示判断(字符串比较)时是等价的
+> 在 (( )) 中 = 表示赋值， == 表示判断(整数比较)，它们不等价
