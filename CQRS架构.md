@@ -1,0 +1,1 @@
+[CQRS 译文](https://www.infoq.cn/article/WDLPjOsudOGa34JUTyS9)
