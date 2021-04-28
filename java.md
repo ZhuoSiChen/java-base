@@ -32,4 +32,6 @@ AQS相关.
    - 把运行的线程用node串起来
    - 公平与不公平的区别.
    - 线程如何进队
-
+#### CountDownLatch 与 CyclicBarrier
+CountDownLatch : 等待与释放的可以在不同的线程上进行. 
+CyclicBarrier : 是一个屏障,等待 **所有线程** 到达了这个屏障后,线程才能执行.
